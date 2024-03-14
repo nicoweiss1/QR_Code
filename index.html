@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Stempelsystem</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Stempelsystem</h1>
+        <div class="clock" id="clock">00:00:00</div>
+        <button onclick="stamp()">Stempeln</button>
+        <ul id="stampList">
+            <!-- Stamps will be added here dynamically -->
+        </ul>
+    </div>
+    <script src="index.js"></script>
 </body>
 </html>
