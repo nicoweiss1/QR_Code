@@ -28,7 +28,7 @@ function updateTime() {
 function stamp(employeeIndex) {
     const employee = employees[employeeIndex];
     const now = new Date();
-    const stampTime = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    const stampTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
     const stampList = document.getElementById('stampList');
     const li = document.createElement('li');
     
