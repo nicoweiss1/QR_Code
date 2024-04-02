@@ -24,7 +24,16 @@ function updateTime() {
 
 //stamp funktion für das ein und aus Stempeln des Mitarbeiters. Zuerst neue konstante employee die den
 //Wert des jeweiligen Mitarbeiters nimmt in der Ekigen Klammer wie dann der Parameter dazu heisst
-// wieder das gleiche wie oben schon mit dem Date 
+//wieder das gleiche wie oben schon mit dem Date 
+//konstante stamptime formatiert die akutelle zeit als strint in h min sek wird gebraucht für ein oder ausstempeln
+//konstatne stamplist dort wird der Zeitstempel angezeigt
+//konstante li wird neue listenelement hinzugefügt
+//wenn mitarbeiter ausgestempelt also 2mal weil 1 mal ist false ist also stempedIN = true dann
+// akutelle zeit minus startezeit gibt ingesamte zeit, diese zeit wird zu totaltime addiert
+//die infos dazu werden in der vorhin definierten konstante li befüllt, dann wieder auf falsch gesetzt damit es neu anfangen kann
+// dann das gleiche umgekehrt und wird zum schluss auf true gesetzt
+// wird jeweil das liste element zur stamplist dann zu ul im html hinzugefügt
+
 function stamp(employeeIndex) {
     const employee = employees[employeeIndex];
     const now = new Date();
@@ -44,27 +53,23 @@ function stamp(employeeIndex) {
     }
 
     stampList.appendChild(li);
-    updateLongestWorked();
 }
 
+//umwandlung von den gegeben milisekunden in der funktion oben 
+//das oben in der klammer formattime(..) das in der klammer dieser wert hat der parameter
+//zuerst sekunden umgerechnet, 1000ms = 1s
+//danaxh die sekunden werden durch 60 geteilt für die minuten
+//dann die stunden durch 60 geteilt 
 function formatTime(milliseconds) {
     const seconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     return `${hours}:${String(minutes % 60).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
 }
-
-function updateLongestWorked() {
-    const longestWorkedContainer = document.getElementById('longestWorked');
-    longestWorkedContainer.innerHTML = '';
-    const sortedEmployees = [...employees].sort((a, b) => b.totalTime - a.totalTime);
-    sortedEmployees.forEach(employee => {
-        const li = document.createElement('li');
-        li.textContent = `${employee.name}: ${formatTime(employee.totalTime)}`;
-        longestWorkedContainer.appendChild(li);
-    });
-}
-
+ //erstmal holt das html in eine konstante danach einfach zu verstehen
+ //der eventlistener sorgt dafür das man klicken kann nach dem click kommt die funktion stamp mit den richtigen daten des jeweiligen
+ //mitarbeits
+ //danaxh werden die infos zum button mit appendchild zur oberenkonstante buttons hinzugefügt
 function createButtons() {
     const buttonsContainer = document.getElementById('buttons');
 
@@ -75,6 +80,7 @@ function createButtons() {
         buttonsContainer.appendChild(button);
     });
 }
-
+//create buttons wird aufgerufne und und setinterval funktion heisst jede 1000ms also jede 1s wird updateTime funktion
+//aktualisiert also die neue Zeit wird angezeigt
 setInterval(updateTime, 1000);
 createButtons();
